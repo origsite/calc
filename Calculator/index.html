@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .calculator {
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-4">
+  <div class="calculator">
+    <textarea input type="text" class="form-control mb-2" id="result" readonly></textarea>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-secondary btn-block" onclick="appendToTextbox(7)">7</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-secondary btn-block" onclick="appendToTextbox(8)">8</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-secondary btn-block" onclick="appendToTextbox(9)">9</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary btn-block" onclick="appendToTextbox('/')">/</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-secondary btn-block" onclick="appendToTextbox('4')">4</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-secondary btn-block" onclick="appendToTextbox('5')">5</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-secondary btn-block" onclick="appendToTextbox('6')">6</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary btn-block" onclick="appendToTextbox('*')">*</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-secondary btn-block" onclick="appendToTextbox('1')">1</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-secondary btn-block" onclick="appendToTextbox('2')">2</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-secondary btn-block" onclick="appendToTextbox('3')">3</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary btn-block" onclick="appendToTextbox('-')">-</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-secondary btn-block" onclick="appendToTextbox('0')">0</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-secondary btn-block" onclick="appendToTextbox('.')">.</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary btn-block" onclick="calculate()">=</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary btn-block" onclick="appendToTextbox('+')">+</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-danger btn-block" onclick="sliceValue()">Clear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function appendToTextbox(value) {
+    var textbox = document.getElementById('result');
+    
+    textbox.value += value;
+  }
+  function sliceValue() {
+    var textbox = document.getElementById('result');
+    var slicedValue = textbox.value.slice(1); // Slicing from index 1 onwards
+    textbox.value = slicedValue;
+  }
+
+  function calculate() {
+    var textbox = document.getElementById('result');
+    var equation = textbox.value;
+    var result = evalBigInt(equation);
+    textbox.value = '';
+    textbox.value = result;
+  }
+  function evalBigInt(equation) {
+    var num1 = BigInt(eval(equation));
+    return num1;
+  }
+  </script>
+ 
